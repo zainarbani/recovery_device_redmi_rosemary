@@ -126,11 +126,6 @@ TARGET_COPY_OUT_SYSTEM_EXT = system_ext
 TARGET_RECOVERY_PIXEL_FORMAT := "RGBX_8888"
 TARGET_RECOVERY_FSTAB := $(DEVICE_PATH)/recovery/root/system/etc/recovery.fstab
 
-# Additional binaries & libraries needed for recovery
-TARGET_RECOVERY_DEVICE_MODULES += \
-    libkeymaster4 \
-    libpuresoftkeymasterdevice
-
 # Hack: prevent anti rollback
 PLATFORM_SECURITY_PATCH := 2099-12-31
 VENDOR_SECURITY_PATCH := 2099-12-31
@@ -165,6 +160,11 @@ TW_HAS_NO_RECOVERY_PARTITION := true
 # Decryption
 TW_INCLUDE_CRYPTO := true
 TW_INCLUDE_FBE_METADATA_DECRYPT := true
+TARGET_RECOVERY_DEVICE_MODULES += \
+    libkeymaster4 \
+    libkeymaster41 \
+    libpuresoftkeymasterdevice
 TW_RECOVERY_ADDITIONAL_RELINK_LIBRARY_FILES += \
     $(TARGET_OUT_SHARED_LIBRARIES)/libkeymaster4.so \
+    $(TARGET_OUT_SHARED_LIBRARIES)/libkeymaster41.so \
     $(TARGET_OUT_SHARED_LIBRARIES)/libpuresoftkeymasterdevice.so
